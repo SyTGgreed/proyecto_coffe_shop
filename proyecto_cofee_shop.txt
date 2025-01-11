@@ -1,0 +1,10 @@
+####################### PROTECTO COFFE_SHOP #################
+
+-crear carpetas de protecto y entorno virtual
+-crear entorno virtual y activarlo
+-instalar dependecias pip install Django
+-inicar protecto con django-admin startproject coffe_shop
+	- verificar si se creo con ls
+-abrir visual studio code con: code -r coffe_shopp/
+-
+
