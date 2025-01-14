@@ -29,3 +29,5 @@
 -iniciamos la app productos : python3 manage.py startapp productos
 -registramos la app en settings, installed apps
 -creamos el modelo product
+-creamos migraciones y las aplicamos
+-la dependencia pillow nos permite agregar validaciones a las imagenes
