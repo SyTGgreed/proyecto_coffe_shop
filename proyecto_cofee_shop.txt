@@ -6,5 +6,12 @@
 -inicar protecto con django-admin startproject coffe_shop
 	- verificar si se creo con ls
 -abrir visual studio code con: code -r coffe_shopp/
--
-
+- instalar extensiones en visualestudiocode como:
+		- python
+		- python debugger
+		- Black Formatter
+		- django
+-añadir git.ignore por medio de la aplicacion web : gitignore.io
+		- digitar django y copiar el contenido
+	- crear archivo gitignore dentro de la carpeta del proyecto y pegar el contenido tomado de la
+	pagina gitignore.io
