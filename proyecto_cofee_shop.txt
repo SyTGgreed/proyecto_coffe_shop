@@ -1,5 +1,7 @@
 ####################### PROTECTO COFFE_SHOP #################
 
+######### SETUP #######################
+
 -crear carpetas de protecto y entorno virtual
 -crear entorno virtual y activarlo
 -instalar dependecias pip install Django
@@ -18,3 +20,12 @@
 -crear archivo requirements.txt y escribir las dependencias utilizadas en el proyecto unicamente
 		pip3 freeze ----> muestra las dependencias
 -crear archivo requirements_dev.txt y escribir las dependencias utilizadas en desarrollo 
+		ejemplo: ipython
+		
+-para instalar dependencias de los archivos
+
+#####################################################################################################
+
+-iniciamos la app productos : python3 manage.py startapp productos
+-registramos la app en settings, installed apps
+-creamos el modelo product
