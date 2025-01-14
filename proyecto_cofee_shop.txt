@@ -15,3 +15,6 @@
 		- digitar django y copiar el contenido
 	- crear archivo gitignore dentro de la carpeta del proyecto y pegar el contenido tomado de la
 	pagina gitignore.io
+-crear archivo requirements.txt y escribir las dependencias utilizadas en el proyecto unicamente
+		pip3 freeze ----> muestra las dependencias
+-crear archivo requirements_dev.txt y escribir las dependencias utilizadas en desarrollo 
