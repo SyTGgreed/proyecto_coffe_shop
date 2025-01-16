@@ -31,3 +31,4 @@
 -creamos el modelo product
 -creamos migraciones y las aplicamos
 -la dependencia pillow nos permite agregar validaciones a las imagenes
+-instalar dependencia sqlite3 y extension en visual studio para la base de datos
