@@ -23,7 +23,7 @@
 		ejemplo: ipython
 		
 -para instalar dependencias de los archivos
-
+	pip install -r requeriments.txt
 #####################################################################################################
 
 -iniciamos la app productos : python3 manage.py startapp productos
@@ -32,3 +32,9 @@
 -creamos migraciones y las aplicamos
 -la dependencia pillow nos permite agregar validaciones a las imagenes
 -instalar dependencia sqlite3 y extension en visual studio para la base de datos
+
+########## formularios ######################################
+
+-creamos archivo dentro de la app forms.py
+-lo importamos en las vistas
+-
