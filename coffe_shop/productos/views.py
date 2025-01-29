@@ -10,15 +10,13 @@ from django.views import generic
 
 # Create your views here.
 
-class ListProductsViews(TemplateView):
-    template_name = "coffe_shop/productos.html"
+class ListProductsViews(generic.ListView):    # lista generica ListView
+                            # nos permite tener un modelo, un template y cambiar el nombre de la variable que estara
+                                # en el contexto
+    model = Product
+    template_name = "productos/productos.html"
+    context_object_name = 'products'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        products = Product.objects.all()
-        context["list_products"] = products
-
-        return context
     
 #Django nos proporciona varias vistas genericas
 # una de ellas es form.view que importamos desde generic
