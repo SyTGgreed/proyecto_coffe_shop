@@ -37,4 +37,19 @@
 
 -creamos archivo dentro de la app forms.py
 -lo importamos en las vistas
--
+-creamos respectivas vistas, templates y path
+-creamos carpeta (templates) dentro de la carpeta del proyecto
+-creamos archivo base.html con un block content
+-agregamos con extends la plantilla del base.html y el block content
+		el html debe ir dentro del block
+-configurar en settings  templates dirs 
+		con el metodo os.path.join  ----> metodo de python para unir dos paths
+		requiere de dos parametros (BASE_DIR,'nombre_de_la_carpeta)
+
+########### CCS  ###################
+
+-adañir al archivo base.html el framework tailwindcss con CDN copiar el script
+-ayudar para el diseño de la pagina hyperui.dev
+		nos perimite copiar codigo html listo para ser utilizado con tailwindcss
+
+

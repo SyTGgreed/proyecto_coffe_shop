@@ -15,7 +15,7 @@ class ListProductsViews(generic.ListView):    # lista generica ListView
                                 # en el contexto
     model = Product
     template_name = "productos/productos.html"
-    context_object_name = 'products'
+    context_object_name = 'products'           #-- este nombre se utiliza en el archivo template html
 
     
 #Django nos proporciona varias vistas genericas
