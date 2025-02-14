@@ -52,4 +52,13 @@
 -ayudar para el diseño de la pagina hyperui.dev
 		nos perimite copiar codigo html listo para ser utilizado con tailwindcss
 
+####### ADMIN ###################
+
+creamos superusuario 
+ 	- python3 manage.py createsuperuser
+ 	-nombre, correo, contraseña
+ 	
+-archivo admin.py
+	
+	
 
