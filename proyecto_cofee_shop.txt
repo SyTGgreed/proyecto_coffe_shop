@@ -59,6 +59,23 @@ creamos superusuario
  	-nombre, correo, contraseña
  	
 -archivo admin.py
+-agregamos clase ProductAdmin
+	le pasamos el modelo Product
+	list_display = ['name','price'] ---> con list_display podremos pasar atributos para que
+						se muestren en el admin
+	search_fields = ['name']   ----> añade un buscador en el admin y recibe los mismos atributos que list_display
+	
+admin.site.register(Product, ProductAdmin)
+	requiere el modelo y la clase de registro
+	
+Desde el admin se puede actualizarlos productos e ingresar imagenes, se puede ver el historial de cambios
+
+####### IMAGENES #################
+
+para obtener urls de archivos estaticos Django usa un metodo para ello
+	from django.conf.urls.static import static
+	from django.config import settings
+	+ static(settings.MEDIA_URL, document_root) ---> como parametro recibe las configuraciones de nuestra app, y un document_root
 	
 	
 
