@@ -14,6 +14,12 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
+        Hola,
+        {% if user.authenticated %}
+            {{ user.username }}
+        {% else %}
+            <a href="{% url "login" %}">Login</a>
+        {%endif%}
         <div class="pl-2 ...">
         {% block content %}{% endblock content %} 
         </div>
