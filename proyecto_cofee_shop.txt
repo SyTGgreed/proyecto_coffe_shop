@@ -75,7 +75,49 @@ Desde el admin se puede actualizarlos productos e ingresar imagenes, se puede ve
 para obtener urls de archivos estaticos Django usa un metodo para ello
 	from django.conf.urls.static import static
 	from django.config import settings
-	+ static(settings.MEDIA_URL, document_root) ---> como parametro recibe las configuraciones de nuestra app, y un document_root
+	+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) ---> como parametro recibe las configuraciones de nuestra app, y un document_root
 	
+############# creamos app users ################
+
+- python3 manage.py startapp users
+- registrarla en settings.py	
+	INSTALLED APPS
+- creamos el archivo urls.py
+	añadir path
+	importar vista de django para el login con:
+		from.django.contrib.auth.views import loginView
+-creamos carpeta templates y dentro de esta otra carpeta users y dentro de esta archivo login.html
+.añadimos al path el template de login.html
+
+-registramos las urls en el archivo global de urls
+
+-en el contexto django nos da el formulario en una variable form
+
+#################### CRISPY FORMS ##########################
+
+pip install crispy-tailwind
+-añadir a settings.py INSTALLED APPS :
+	"crispy_forms",
+	"crispy_tailwind",
+-añadir parametros de configuracion en settings al final de codigo:
+	CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+	CRISPY_TEMPLATE_PACK = "tailwind"
+	
+-para usar el formalario de tailwind:
+
+	{% load tailwind_filters %}
+	{{ form|crispy }}
+	
+######### redireccionamiento del login #######################
+
+ en settings añadir:
+ 
+ 	- LOGIN_REDIRECT_URL = 'nombre de la url'
+ 	-cambiar el metodo del formulario por:
+ 		method='post'
+ 	- añadir csrf_token:
+ 		{% csrf_token %}
+
+
 	
 
