@@ -115,8 +115,40 @@ pip install crispy-tailwind
  	- LOGIN_REDIRECT_URL = 'nombre de la url'
  	-cambiar el metodo del formulario por:
  		method='post'
+ 	-añadir un if para ver si esta logeado:
+ 		{% if user.is_authenticated %}
+            		{{ user.username }}
+        	{% else %}
+            		<a href="{% url "login" %}">Login</a>
+        	{%endif%}
  	- añadir csrf_token:
  		{% csrf_token %}
+
+#################### LOGOUT ########################
+
+-importamos LogoutView desde:
+	django.contrib.auth.views import LogoutView
+	
+-añadimos path con nombre logout:
+	path('logout/', LogoutView.as_view(), name'logout')
+	
+-en el base.html agregar en un div un nuevo form con action de la url de logout:
+	<div>
+		{% if user.is_authenticated %}
+			<form action= "{% url "logout"%}" method="post">
+				{% csrf_token %}
+				<button type="submit ">
+					Cerrar sesion
+				</button>
+			
+			
+			</form>
+		{% else %}
+			<a href="">
+			</a>
+		
+		{%endif%}
+	</div>
 
 
 	

@@ -1,0 +1,25 @@
+{%extends "base.html"%}
+{%load tailwind_filters%}
+
+{%block content%}
+
+    <div>
+        <h1>Iniciar sesion</h1>
+        <form action="" method="post">
+            {%csrf_token%}
+            {{ form|crispy }}
+            <button
+            type="submit">
+                Registrarse
+            </button>
+        </form>
+        <p>
+            ya tienes una cuenta
+            <a href="url "login""> Inicia sesion </a>
+        </p>
+
+    </div>
+
+{%endblock content%}
+
+

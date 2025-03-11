@@ -14,15 +14,28 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        Hola,
-        {% if user.authenticated %}
-            {{ user.username }}
-        {% else %}
-            <a href="{% url "login" %}">Login</a>
-        {%endif%}
-        <div class="pl-2 ...">
-        {% block content %}{% endblock content %} 
+        <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center md:gap-8">
+                Hola,
+                {% if user.is_authenticated %}
+                    {{ user.username }}
+
+                <form action="{% url "logout" %}" method="post">
+                    {%csrf_token%}
+                    <button type="submit">
+                        Cerrar sesion                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+                    </button>
+                </form>
+                {% else %}
+                    <a href="{% url "login" %}">Login</a>
+                {%endif%}
+                <div class="pl-2 ...">
+                {% block content %}{% endblock content %} 
+                </div>
+                <script src="" async defer></script>
+                <img src="https://media.istockphoto.com/id/505168330/es/foto/taza-de-caf%C3%A9-con-granos-de-caf%C3%A9-con-leche-y-varillas-de-canela.jpg?s=612x612&w=0&k=20&c=ud_g_RyWoPSEJ4_KkpsQfFuWh3iVPlyiTHqpu69ayEg=" class="rounded" alt="">
+            </div>
         </div>
-        <script src="" async defer></script>
+    
     </body>
 </html>
