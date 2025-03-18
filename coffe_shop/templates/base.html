@@ -21,7 +21,7 @@
                     {{ user.username }}
 
                 <form action="{% url "logout" %}" method="post">
-                    {%csrf_token%}
+                    {% csrf_token %}
                     <button type="submit">
                         Cerrar sesion                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
                     </button>

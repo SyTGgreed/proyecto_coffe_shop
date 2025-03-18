@@ -141,15 +141,24 @@ pip install crispy-tailwind
 					Cerrar sesion
 				</button>
 			
-			
-			</form>
-		{% else %}
-			<a href="">
-			</a>
-		
-		{%endif%}
-	</div>
+################ configuracion idioma en settings ###################
 
+LANGUAGE_CODE ='es-co'
+			
+
+############ creacion app ordenes  #######################
+
+python3 manage.py startapp order
+
+- registrarla en install apps en settings.py
+- crear archivo urls.py
+- registrarla en el archivo general de urls.py
+- creamos los modelos en models.py
+- aplicamos las migraciones
+	- python3 manage.py makemigrations
+	- python3 manage.py migrate
+
+-registrar los modelos en el admin.py
 
 	
 
