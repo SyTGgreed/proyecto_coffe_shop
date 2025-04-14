@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from rest_framework.views import APIView
+from .serializers import ProductSerializer
+from rest_framework.response import Response
 
 from productos.forms import ProductForm
 
@@ -39,6 +42,14 @@ class success(TemplateView):
         all_products = Product.objects.all() # .objects.all() obtiene todos los atributos de Product
 
         return render(request,'success.html',{'products':all_products})
+    
+class ProductListAPI(APIView):
+    authentication_classes = []
+    permission_classes = []
+    def get(self, request):
+        products = Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
     
     
 

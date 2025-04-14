@@ -160,5 +160,22 @@ python3 manage.py startapp order
 
 -registrar los modelos en el admin.py
 
+
+################### DJANGO REST FRAMEWORK #######################
+
+libreria de python consultar para mas informacion: https://www.django-rest-framework.org/
+
+instalar:
+	pip install djangorestframework
+	agregar al archivo requirements la dependencia
+	agregar en install apps en configuracion del proyecto(settings)
+		'rest_framework'
+	añadir configuracion que esta en la pagina djano rest framework al final en settigns
+	
+crear archivo serializers.py en la app products
+
+	
+	
+
 	
 

@@ -29,11 +29,14 @@
                 {% else %}
                     <a href="{% url "login" %}">Login</a>
                 {%endif%}
+                <a href="{% url "my_order" %}" class="group inline-block rounded-sm bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2px] hover:text-white focus:ring-3 focus:outline-hidden">
+                    Mi pedido
+                </a>
                 <div class="pl-2 ...">
                 {% block content %}{% endblock content %} 
                 </div>
                 <script src="" async defer></script>
-                <img src="https://media.istockphoto.com/id/505168330/es/foto/taza-de-caf%C3%A9-con-granos-de-caf%C3%A9-con-leche-y-varillas-de-canela.jpg?s=612x612&w=0&k=20&c=ud_g_RyWoPSEJ4_KkpsQfFuWh3iVPlyiTHqpu69ayEg=" class="rounded" alt="">
+               <!--<img src="https://media.istockphoto.com/id/505168330/es/foto/taza-de-caf%C3%A9-con-granos-de-caf%C3%A9-con-leche-y-varillas-de-canela.jpg?s=612x612&w=0&k=20&c=ud_g_RyWoPSEJ4_KkpsQfFuWh3iVPlyiTHqpu69ayEg=" class="rounded" alt=""> --> 
             </div>
         </div>
     
