@@ -173,6 +173,145 @@ instalar:
 	añadir configuracion que esta en la pagina djano rest framework al final en settigns
 	
 crear archivo serializers.py en la app products
+	necesita un modelo y los campos que queremos mostrar
+	
+############################  POSTGRESQL ###############################
+
+intentar usar los mismos motores de bases de datos tanton en produccion como el local
+
+pip install psycopg2-binary  ---> si pide esta libreria instalarla con este comando
+
+para configurar base de datos en local :
+
+	-ir a settings y buscar Database
+	-borrar el name y confifurar en engine pos postgresql
+	- sudo apt install posgresql
+	- pip install psycopg2-bynary
+	
+	- sudo -u postgres psql   ----> abrir postgres
+	- psql -h localhost postgres_local;  
+	- sudo -u postgres psql ------> conectarse a posgres con usuario admin
+	- para ver si hay alguna base de datos creada:
+		- \l
+	- para conectarse a una base de datos:
+		- \c nombre_de_la_base_de_datos
+	- para ver usuarios:
+		- \du
+	- crear usuario con contraseña:
+		- CREATE USER kevin_H WITH PASSWORD '9422';
+	- dar permisos a usuario en una base de datos especifica:
+		- GRANT ALL PRIVILEGES ON DATABASE nombre_de_la_BD TO usuario;
+			- ejm: GRANT ALL PRIVILEGES ON DATABASE postgres_local TO kevin_h;
+	- para crear base de datos:
+		- CREATE DATABASE nombre_de_la_base_de_datos ;
+		
+	- configurar en el proyecto de django en settings.py:
+		-en DATABASES:
+			'HOST': 'localhost',  -----> o el nombre del rol que quiera usar
+			-validar que la base de datos quedo bien configurada_
+	- python3 manage.py dbshell
+	
+###############################   AWS   ##############################
+
+- registrarse en la pagina de aws.amazon.com
+- entrar a RDS
+	- entrar a consola
+- databases
+- create database
+- posgreSQL
+- Templates:
+	- free tier
+- settings:
+	- DB instance identifier:
+		- db-curso-django
+- credentials settings:
+	- master username:
+		- db_username
+	- master password:
+		- db-paswword
+		
+- public acces:
+	- yes
+	
+- create database
+
+- configurar red de amazon dando click en la base de datos al crearla
+- default sg
+- click al nombre
+- editar reglas de entrada
+- agregar regla
+	- todo el trafico
+	- origen mi ip
+- guardar 
+- hacer lo mismo para reglas de salida
+
+- CONFIGURAR EN SETTINGS.PY
+	- DATABASES:
+		- 'HOST': 'copiar url de nuestra instancia en aws',
+		- 'PORT': 'el puerto que esta en la instancia',
+		- 'USER': 'db_username',
+	
+########################### ENVIRON CREDENCIALES #############################
+
+quitar credenciales de nuestro archivo settigns para mas seguridad.
+
+- instalar libreria:
+	- pip install django-environ
+- importar en el archivo settings.py:
+	- import environ
+	- crear variable:
+		- env=environ.Env()   ----> con esto ya podemos crear un archivo .env en la raiz del proyecto
+- crear archivo .env en la raiz del proyecto:
+	- .env
+	- dentro del archivo crear la variable con la contraseña:
+		- DJANGO_dB_PASSWORD='contraseña'
+- configurar en el archivo settings.py el password:
+	- 'PASSWORD': env.str(variable_creada_en_el_archivo_.env),
+- cargar la variable de entorno:
+	- desde la consola:
+		- export nombre_de_la_variable="contraseña"
+			- ejm: export DJANGO_DB_PASSWORD="mi_contraseña"
+		- comprobar ejecutando el programa:
+			- python3 manage.py dbshell
+	- desde el archivo .env:
+		- ir a settings
+		- agregar nueva linea de codigo:
+			- environ.Env.read_env(os.path.join(BASE_DIR,".env"))
+	- probamos creando una nueva variable para USER en el archivo .env y configurandolo en settings.py
+	
+############## utilizando otros metodos que nos brinda la libreria environ ##############
+
+- creamos la variable en settings.py:
+	- env.db()  ----> nos devuelve todos los parametros de la base de datos
+	- definimos la variable en el archivo .env:
+		- DJANGO_DB_URL="postgres://USER:PASSWORD@HOST:PORT/NAME"
+		- reemplazamos los valores y borramos las anteriores variables creadas en el archivo .env
+		- quitamos el diccionario en el archivo settings.py y lo reemplazamos con la variable DJANGO_DB_URL
+- probamos que quedo bien ejecutando la aplicacion:
+	- python3 manage.py dbshell
+	
+########################  TESTING CON UNIT TESTS  ###########################
+
+para verificar que los cambios que hemos realizado estén funcionando correctamente sin afectar al proyecto 
+en general, realizamos testing.
+
+- en la aplicacion que queramos hacer pruebas:
+	- abrimos el archivo tests.py
+	- creamos una clase con el nombre de la vista a testear:
+		- ejm: class ProductsListViewTests(TestCase):
+	- creamos el metodo de prueba
+	- verificamos si el test funciona bien ejecutando:
+		- python3 manage.py test  ---> esto crea una nueva base de datos de prueba y correra las lineas de prueba
+						del test.
+- los breakpoints nos permiten detener la ejecucion del codigo para poder validar variables.
+		
+	
+
+	
+
+		
+	
+	
 
 	
 	
