@@ -3,6 +3,7 @@ from .models import Order, OrderProduct  # importamos los modelos
 
 # Register your models here.
 
+
 # para que los productos salgan en linea
 # para registrar los inline se hace en la clase del modelo padre (OrderAdmin)
 class OrderProductInlineAdmin(admin.TabularInline):
@@ -12,8 +13,9 @@ class OrderProductInlineAdmin(admin.TabularInline):
 
 class OrderAdmin(admin.ModelAdmin):
     model = Order
-    inlines = [                  # agregamos nuevo parametro y dentro la clase inline
+    inlines = [  # agregamos nuevo parametro y dentro la clase inline
         OrderProductInlineAdmin
     ]
 
-admin.site.register(Order, OrderAdmin) # Registramos 
+
+admin.site.register(Order, OrderAdmin)  # Registramos

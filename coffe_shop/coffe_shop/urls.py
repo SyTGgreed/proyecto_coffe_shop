@@ -14,17 +14,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('lista_productos/', include('productos.urls')), #incluimos urls de app productos
-    path('usuarios/', include('users.urls')), # incluimos urls de app users   
-    path('pedidos/', include('orders.urls')) , # incluimos urls de app orders                                                                                                                                                                                                                                                                                                                                                                                                       
-
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)   # static() --> para obtener la url de los archivos estaticos
-        # recibe como parametros la configuracion que tenemos de los archivos estaticos y de media
-        # importando settings 
+    path("", include("productos.urls")),  # incluimos urls de app productos
+    path("admin/", admin.site.urls),
+    path("usuarios/", include("users.urls")),  # incluimos urls de app users
+    path("pedidos/", include("orders.urls")),  # incluimos urls de app orders
+] + static(
+    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+)  # static() --> para obtener la url de los archivos estaticos
+# recibe como parametros la configuracion que tenemos de los archivos estaticos y de media
+# importando settings
