@@ -1,0 +1,7 @@
+asgiref==3.8.1
+Django==5.1.4
+sqlparse==0.5.3
+pillow==11.1.0
+crispy-tailwind==1.0.3
+djangorestframework==3.16.0
+django-environ==0.12.0

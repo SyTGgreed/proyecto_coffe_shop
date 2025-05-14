@@ -44,12 +44,12 @@ class success(TemplateView):
         return render(request,'success.html',{'products':all_products})
     
 class ProductListAPI(APIView):
-    authentication_classes = []
-    permission_classes = []
+    authentication_classes = []   # quitar autenticacion
+    permission_classes = []       # quitar permisos
     def get(self, request):
         products = Product.objects.all()
         serializer = ProductSerializer(products, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data)    # data configurada en formato json
     
     
 

@@ -20,7 +20,7 @@ from .views import ListProductsViews, ProductFormView, success, ProductListAPI
 
 
 urlpatterns = [
-    path('list_products/', ListProductsViews.as_view(), name='list_product'), #el name se utiliza para referenciar en el archivo html
+    path('', ListProductsViews.as_view(), name='list_product'), #el name se utiliza para referenciar en el archivo html
     path('agregar/', ProductFormView.as_view(), name='add_products'),
     path('productos_agregados/',success.as_view(), name='success'),
     path('api/',ProductListAPI.as_view() , name='add_product'),

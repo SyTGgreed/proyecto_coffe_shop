@@ -1,0 +1,318 @@
+####################### PROTECTO COFFE_SHOP #################
+
+######### SETUP #######################
+
+-crear carpetas de protecto y entorno virtual
+-crear entorno virtual y activarlo
+-instalar dependecias pip install Django
+-inicar protecto con django-admin startproject coffe_shop
+	- verificar si se creo con ls
+-abrir visual studio code con: code -r coffe_shopp/
+- instalar extensiones en visualestudiocode como:
+		- python
+		- python debugger
+		- Black Formatter
+		- django
+-añadir git.ignore por medio de la aplicacion web : gitignore.io
+		- digitar django y copiar el contenido
+	- crear archivo gitignore dentro de la carpeta del proyecto y pegar el contenido tomado de la
+	pagina gitignore.io
+-crear archivo requirements.txt y escribir las dependencias utilizadas en el proyecto unicamente
+		pip3 freeze ----> muestra las dependencias
+-crear archivo requirements_dev.txt y escribir las dependencias utilizadas en desarrollo 
+		ejemplo: ipython
+		
+-para instalar dependencias de los archivos
+	pip install -r requeriments.txt
+#####################################################################################################
+
+-iniciamos la app productos : python3 manage.py startapp productos
+-registramos la app en settings, installed apps
+-creamos el modelo product
+-creamos migraciones y las aplicamos
+-la dependencia pillow nos permite agregar validaciones a las imagenes
+-instalar dependencia sqlite3 y extension en visual studio para la base de datos
+
+########## formularios ######################################
+
+-creamos archivo dentro de la app forms.py
+-lo importamos en las vistas
+-creamos respectivas vistas, templates y path
+-creamos carpeta (templates) dentro de la carpeta del proyecto
+-creamos archivo base.html con un block content
+-agregamos con extends la plantilla del base.html y el block content
+		el html debe ir dentro del block
+-configurar en settings  templates dirs 
+		con el metodo os.path.join  ----> metodo de python para unir dos paths
+		requiere de dos parametros (BASE_DIR,'nombre_de_la_carpeta)
+
+########### CCS  ###################
+
+-adañir al archivo base.html el framework tailwindcss con CDN copiar el script
+-ayudar para el diseño de la pagina hyperui.dev
+		nos perimite copiar codigo html listo para ser utilizado con tailwindcss
+
+####### ADMIN ###################
+
+creamos superusuario 
+ 	- python3 manage.py createsuperuser
+ 	-nombre, correo, contraseña
+ 	
+-archivo admin.py
+-agregamos clase ProductAdmin
+	le pasamos el modelo Product
+	list_display = ['name','price'] ---> con list_display podremos pasar atributos para que
+						se muestren en el admin
+	search_fields = ['name']   ----> añade un buscador en el admin y recibe los mismos atributos que list_display
+	
+admin.site.register(Product, ProductAdmin)
+	requiere el modelo y la clase de registro
+	
+Desde el admin se puede actualizarlos productos e ingresar imagenes, se puede ver el historial de cambios
+
+####### IMAGENES #################
+
+para obtener urls de archivos estaticos Django usa un metodo para ello
+	from django.conf.urls.static import static
+	from django.config import settings
+	+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) ---> como parametro recibe las configuraciones de nuestra app, y un document_root
+	
+############# creamos app users ################
+
+- python3 manage.py startapp users
+- registrarla en settings.py	
+	INSTALLED APPS
+- creamos el archivo urls.py
+	añadir path
+	importar vista de django para el login con:
+		from.django.contrib.auth.views import loginView
+-creamos carpeta templates y dentro de esta otra carpeta users y dentro de esta archivo login.html
+.añadimos al path el template de login.html
+
+-registramos las urls en el archivo global de urls
+
+-en el contexto django nos da el formulario en una variable form
+
+#################### CRISPY FORMS ##########################
+
+pip install crispy-tailwind
+-añadir a settings.py INSTALLED APPS :
+	"crispy_forms",
+	"crispy_tailwind",
+-añadir parametros de configuracion en settings al final de codigo:
+	CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+	CRISPY_TEMPLATE_PACK = "tailwind"
+	
+-para usar el formalario de tailwind:
+
+	{% load tailwind_filters %}
+	{{ form|crispy }}
+	
+######### redireccionamiento del login #######################
+
+ en settings añadir:
+ 
+ 	- LOGIN_REDIRECT_URL = 'nombre de la url'
+ 	-cambiar el metodo del formulario por:
+ 		method='post'
+ 	-añadir un if para ver si esta logeado:
+ 		{% if user.is_authenticated %}
+            		{{ user.username }}
+        	{% else %}
+            		<a href="{% url "login" %}">Login</a>
+        	{%endif%}
+ 	- añadir csrf_token:
+ 		{% csrf_token %}
+
+#################### LOGOUT ########################
+
+-importamos LogoutView desde:
+	django.contrib.auth.views import LogoutView
+	
+-añadimos path con nombre logout:
+	path('logout/', LogoutView.as_view(), name'logout')
+	
+-en el base.html agregar en un div un nuevo form con action de la url de logout:
+	<div>
+		{% if user.is_authenticated %}
+			<form action= "{% url "logout"%}" method="post">
+				{% csrf_token %}
+				<button type="submit ">
+					Cerrar sesion
+				</button>
+			
+################ configuracion idioma en settings ###################
+
+LANGUAGE_CODE ='es-co'
+			
+
+############ creacion app ordenes  #######################
+
+python3 manage.py startapp order
+
+- registrarla en install apps en settings.py
+- crear archivo urls.py
+- registrarla en el archivo general de urls.py
+- creamos los modelos en models.py
+- aplicamos las migraciones
+	- python3 manage.py makemigrations
+	- python3 manage.py migrate
+
+-registrar los modelos en el admin.py
+
+
+################### DJANGO REST FRAMEWORK #######################
+
+libreria de python consultar para mas informacion: https://www.django-rest-framework.org/
+
+instalar:
+	pip install djangorestframework
+	agregar al archivo requirements la dependencia
+	agregar en install apps en configuracion del proyecto(settings)
+		'rest_framework'
+	añadir configuracion que esta en la pagina djano rest framework al final en settigns
+	
+crear archivo serializers.py en la app products
+	necesita un modelo y los campos que queremos mostrar
+	
+############################  POSTGRESTQL ###############################
+
+intentar usar los mismos motores de bases de datos tanton en produccion como el local
+
+para configurar base de datos en local :
+
+	-ir a settings y buscar Database
+	-borrar el name y confifurar en engine pos postgresql
+	- sudo apt install posgresql
+	- pip install psycopg2-bynary
+	
+	- sudo -u postgres psql   ----> abrir postgres
+	- psql -h localhost postgres_local;  
+	- sudo -u postgres psql ------> conectarse a posgres con usuario admin
+	- para ver si hay alguna base de datos creada:
+		- \l
+	- para conectarse a una base de datos:
+		- \c nombre_de_la_base_de_datos
+	- para ver usuarios:
+		- \du
+	- crear usuario con contraseña:
+		- CREATE USER kevin_H WITH PASSWORD '9422';
+	- dar permisos a usuario en una base de datos especifica:
+		- GRANT ALL PRIVILEGES ON DATABASE nombre_de_la_BD TO usuario;
+			- ejm: GRANT ALL PRIVILEGES ON DATABASE postgres_local TO kevin_h;
+	- para crear base de datos:
+		- CREATE DATABASE nombre_de_la_base_de_datos ;
+		
+	- configurar en el proyecto de django en settings.py:
+		-en DATABASES:
+			'HOST': 'localhost',  -----> o el nombre del rol que quiera usar
+			-validar que la base de datos quedo bien configurada_
+	- python3 manage.py dbshell
+	
+###############################   AWS   ##############################
+
+- registrarse en la pagina de aws.amazon.com
+- entrar a RDS
+	- entrar a consola
+- databases
+- create database
+- posgreSQL
+- Templates:
+	- free tier
+- settings:
+	- DB instance identifier:
+		- db-curso-django
+- credentials settings:
+	- master username:
+		- db_username
+	- master password:
+		- db-paswword
+		
+- public acces:
+	- yes
+	
+- create database
+
+- configurar red de amazon dando click en la base de datos al crearla
+- default sg
+- click al nombre
+- editar reglas de entrada
+- agregar regla
+	- todo el trafico
+	- origen mi ip
+- guardar 
+- hacer lo mismo para reglas de salida
+
+- CONFIGURAR EN SETTINGS.PY
+	- DATABASES:
+		- 'HOST': 'copiar url de nuestra instancia en aws',
+		- 'PORT': 'el puerto que esta en la instancia',
+		- 'USER': 'db_username',
+	
+########################### ENVIRON CREDENCIALES #############################
+
+quitar credenciales de nuestro archivo settigns para mas seguridad.
+
+- instalar libreria:
+	- pip install django-environ
+- importar en el archivo settings.py:
+	- import environ
+	- crear variable:
+		- env=environ.Env()   ----> con esto ya podemos crear un archivo .env en la raiz del proyecto
+- crear archivo .env en la raiz del proyecto:
+	- .env
+	- dentro del archivo crear la variable con la contraseña:
+		- DJANGO_dB_PASSWORD='contraseña'
+- configurar en el archivo settings.py el password:
+	- 'PASSWORD': env.str(variable_creada_en_el_archivo_.env),
+- cargar la variable de entorno:
+	- desde la consola:
+		- export nombre_de_la_variable="contraseña"
+			- ejm: export DJANGO_DB_PASSWORD="mi_contraseña"
+		- comprobar ejecutando el programa:
+			- python3 manage.py dbshell
+	- desde el archivo .env:
+		- ir a settings
+		- agregar nueva linea de codigo:
+			- environ.Env.read_env(os.path.join(BASE_DIR,".env"))
+	- probamos creando una nueva variable para USER en el archivo .env y configurandolo en settings.py
+	
+############## utilizando otros metodos que nos brinda la libreria environ ##############
+
+- creamos la variable en settings.py:
+	- env.db()  ----> nos devuelve todos los parametros de la base de datos
+	- definimos la variable en el archivo .env:
+		- DJANGO_DB_URL="postgres://USER:PASSWORD@HOST:PORT/NAME"
+		- reemplazamos los valores y borramos las anteriores variables creadas en el archivo .env
+		- quitamos el diccionario en el archivo settings.py y lo reemplazamos con la variable DJANGO_DB_URL
+- probamos que quedo bien ejecutando la aplicacion:
+	- python3 manage.py dbshell
+	
+########################  TESTING CON UNIT TESTS  ###########################
+
+para verificar que los cambios que hemos realizado estén funcionando correctamente sin afectar al proyecto 
+en general, realizamos testing.
+
+- en la aplicacion que queramos hacer pruebas:
+	- abrimos el archivo tests.py
+	- creamos una clase con el nombre de la vista a testear:
+		- ejm: class ProductsListViewTests(TestCase):
+	- creamos el metodo de prueba
+	- verificamos si el test funciona bien ejecutando:
+		- python3 manage.py test  ---> esto crea una nueva base de datos de prueba y correra las lineas de prueba
+						del test.
+		
+		
+	
+
+	
+
+		
+	
+	
+
+	
+	
+
+	
+

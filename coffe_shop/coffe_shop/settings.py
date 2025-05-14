@@ -12,9 +12,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+env=environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, ".env")) # --> armar path con el BASE_DIR mas la ruta del archivo
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -81,10 +85,7 @@ WSGI_APPLICATION = 'coffe_shop.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': env.db('DJANGO_DB_URL')
 }
 
 
